@@ -4,10 +4,10 @@ ENTRYPOINT [ "/entrypoint" ]
 
 RUN useradd -u 54000 radio && \
         apt-get update && \
-        apt-get install -y  git gcc g++ python2 python2-dev wget make && \
+        apt-get install -y  git gcc g++ python3 python3-dev wget make && \
         cd /opt && \
 	wget https://bootstrap.pypa.io/pip/2.7/get-pip.py && \
-	python2 ./get-pip.py && \
+	python3 ./get-pip.py && \
 	pip install twisted && \
         git clone https://gitlab.hacknix.net/hacknix/DMRlink.git && \
         cd /opt/DMRlink && \
