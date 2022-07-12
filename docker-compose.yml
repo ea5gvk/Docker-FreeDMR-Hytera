@@ -11,8 +11,8 @@ services:
     #do docker-compose down and then docker-compose up -d in this 
     #directory afterwards to stop and start the containers 
     #you may need to do conntrack -F after the restart
-    FreeDMR-IPSC:
-        container_name: FreeDMR-IPSC
+    FreeDMR-HYTERA:
+        container_name: FreeDMR-HYTERA
         ports:
           #IPSC port - right side always stays the same (inside container), left side is 
           #the port you want to present on the outside.
