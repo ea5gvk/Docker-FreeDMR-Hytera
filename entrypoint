@@ -1,0 +1,62 @@
+#!/bin/bash
+
+#Check if a template is mapped and if so, copy it in
+if [ -r "/opt/DMRGateway.tmpl" ] 
+then
+	echo DMRGateway template file found - copying...
+	cp -v /opt/DMRGateway.tmpl /opt/DMRGateway.ini
+fi
+
+
+#Substitute enivronment variables into files
+sed -i "s/{{IPSC_MASTER_PEER}}/$IPSC_MASTER_PEER/" /opt/dmrlink.cfg
+sed -i "s/{{IPSC_MASTER_PEER}}/$IPSC_MASTER_PEER/" /opt/dmrlink.cfg
+sed -i "s/{{IPSC_MASTER_IP}}/$IPSC_MASTER_IP/" /opt/dmrlink.cfg
+sed -i "s/{{IPSC_MASTER_PORT}}/$IPSC_MASTER_PORT/" /opt/dmrlink.cfg
+sed -i "s/{{IPSC_MASTER_PEER}}/$IPSC_MASTER_PEER/" /opt/dmrlink.cfg
+sed -i "s/{{IPSC_TS1}}/$IPSC_TS1/" /opt/dmrlink.cfg
+sed -i "s/{{IPSC_TS2}}/$IPSC_TS2/" /opt/dmrlink.cfg
+sed -i "s/{{IPSC_RADIO_ID}}/$IPSC_RADIO_ID/" /opt/dmrlink.cfg
+sed -i "s/{{IPSC_AUTH_KEY}}/$IPSC_AUTH_KEY/" /opt/dmrlink.cfg
+
+
+sed -i "s/{{HB_CALLSIGN}}/$HB_CALLSIGN/" /opt/hblink.cfg
+sed -i "s/{{HB_RADIO_ID}}/$HB_RADIO_ID/" /opt/hblink.cfg
+sed -i "s/{{HB_RX_FREQ}}/$HB_RX_FREQ/" /opt/hblink.cfg
+sed -i "s/{{HB_TX_FREQ}}/$HB_TX_FREQ/" /opt/hblink.cfg
+sed -i "s/{{HB_TX_POWER}}/$HB_TX_POWER/" /opt/hblink.cfg
+sed -i "s/{{HB_COLORCODE}}/$HB_COLORCODE/" /opt/hblink.cfg
+sed -i "s/{{HB_LAT}}/$HB_LAT/" /opt/hblink.cfg
+sed -i "s/{{HB_LON}}/$HB_LON/" /opt/hblink.cfg
+sed -i "s/{{HB_HEIGHT}}/$HB_HEIGHT/" /opt/hblink.cfg
+sed -i "s/{{HB_LOCATION}}/$HB_LOCATION/" /opt/hblink.cfg
+sed -i "s/{{HB_SLOTS}}/$HB_SLOTS/" /opt/hblink.cfg
+
+sed -i "s/{{DMRG_OPTIONS}}/$DMRG_OPTIONS/" /opt/DMRGateway.ini
+sed -i "s/{{DMRG_TARGET}}/$DMRG_TARGET/" /opt/DMRGateway.ini
+
+#Add rewrite for TS1 TG9 is required
+if [ "$DMRG_REWRITETS1TG9" != "" ]
+then
+	echo 'Setting TS1 rewrite 23590 <-> 9...' 
+	sed -i "s/{{DMRG_REWRITETS1TG9}}/$DMRG_REWRITETS1TG9/" /opt/DMRGateway.ini
+	sed -i "s/#TGRewrite=/TGRewrite=/" /opt/DMRGateway.ini
+fi
+
+#Disable dial a TG only on TS2 if required
+if [ "$DMRG_DISABLEDIAL" == 1 ]
+then
+	echo 'Disable Dial-a-TG only on slot2...'
+	sed -i "s/TypeRewrite=/#TypeRewrite/" /opt/DMRGateway.ini
+fi
+
+
+#Run processes
+cd /opt/DMRlink/
+python /opt/DMRlink/IPSC_Bridge.py -c /opt/dmrlink.cfg -b /opt/IPSC_Bridge.cfg & 
+cd /opt/HBLink
+python /opt/HBLink/HB_Bridge.py -c /opt/hblink.cfg -b /opt/HB_Bridge.cfg &
+cd /opt/DMRGateway
+
+/opt/DMRGateway/DMRGateway /opt/DMRGateway.ini
+	

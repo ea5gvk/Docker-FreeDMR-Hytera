@@ -1,0 +1,65 @@
+#Dockerised IPSC <--> HomeBrew Protocol stack. 
+#
+#For connecting Motorola repeaters to FreeDMR
+#NB: If you get strange audio problems, try only 
+#enabling one timelot. This is a known issue 
+#with the current tools. 
+
+version: '3.3'
+services:
+    #Duplicate this section for each repeater
+    #do docker-compose down and then docker-compose up -d in this 
+    #directory afterwards to stop and start the containers 
+    #you may need to do conntrack -F after the restart
+    FreeDMR-IPSC:
+        container_name: FreeDMR-IPSC
+        ports:
+          #IPSC port - right side always stays the same (inside container), left side is 
+          #the port you want to present on the outside.
+          #This is automatically mapped - docker uses iptables to do this
+          - '55000:55000/udp'
+        environment:
+          #Configure IPSC side (IPSC_Bridge)
+          #True if we are the master
+          #False if we are connecting to an existing IPSC network
+          - IPSC_MASTER_PEER=True
+          #IP and Port only needed if the above is False
+          - IPSC_MASTER_IP=
+          - IPSC_MASTER_PORT=
+          #Which timeslots to forward
+          - IPSC_TS1=True
+          - IPSC_TS2=True
+          #DMR ID we use to talk to the IPSC network
+          #This should probably be the repeater server's SERVER_ID
+          - IPSC_RADIO_ID=2341
+          - IPSC_AUTH_KEY=
+          #Configure HBP (repeater) details (HB_Bridge)
+          - HB_CALLSIGN=
+          - HB_RADIO_ID=
+          - HB_RX_FREQ=
+          - HB_TX_FREQ=
+          - HB_TX_POWER=
+          - HB_COLORCODE=
+          - 'HB_LAT='
+          - 'HB_LON=-'
+          - HB_HEIGHT=
+          - HB_LOCATION=
+          #Which slots to enable: 
+          # 1 = 1, 2 = 2, 3 = both
+          # Note there are some issues with both slots
+          # at this time.
+          # Slot 2 is setup to work with dial-a-tg **only**
+          - HB_SLOTS=3
+          #Configure Repeater server side (DMRGateway)
+          #Put an Options line here to configure static TGs etc
+          - 'DMRG_OPTIONS='
+          #Target server
+          - DMRG_TARGET=
+          #Disable dial-a-tg on slot 2
+          - DMRG_DISABLEDIAL=0
+          #Add a rewrite to TS1TG9.
+          #Leave emtpy to disable
+          - DMRG_REWRITETS1TG9=
+        image: 'hacknix/freedmr-ipsc:latest'
+        #Container will persist over reboots
+        restart: "unless-stopped"
