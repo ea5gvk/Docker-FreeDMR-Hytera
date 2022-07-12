@@ -4,7 +4,7 @@ FROM python:3.10-alpine
 
 ENTRYPOINT [ "/entrypoint" ]
 
-RUN adduser -u 54000 radio && \
+RUN useradd -u 54000 radio && \
 	apk add --update python3 py-pip && \
 	install pip wheel setuptools --upgrade && \
 	install hytera-homebrew-bridge --upgrade && \
