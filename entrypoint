@@ -14,18 +14,13 @@ then
 fi
 
 #Substitute enivronment variables into files
-sed -i "s/{{IPSC_MASTER_PEER}}/$IPSC_MASTER_PEER/" /opt/dmrlink.cfg
-sed -i "s/{{IPSC_MASTER_PEER}}/$IPSC_MASTER_PEER/" /opt/dmrlink.cfg
-sed -i "s/{{IPSC_MASTER_IP}}/$IPSC_MASTER_IP/" /opt/dmrlink.cfg
-sed -i "s/{{IPSC_MASTER_PORT}}/$IPSC_MASTER_PORT/" /opt/dmrlink.cfg
-sed -i "s/{{IPSC_MASTER_PEER}}/$IPSC_MASTER_PEER/" /opt/dmrlink.cfg
-sed -i "s/{{IPSC_TS1}}/$IPSC_TS1/" /opt/dmrlink.cfg
-sed -i "s/{{IPSC_TS2}}/$IPSC_TS2/" /opt/dmrlink.cfg
-sed -i "s/{{IPSC_RADIO_ID}}/$IPSC_RADIO_ID/" /opt/dmrlink.cfg
-sed -i "s/{{IPSC_AUTH_KEY}}/$IPSC_AUTH_KEY/" /opt/dmrlink.cfg
-
-
-
+sed -i "s/{{ip}}/$ip/" /opt/settings.ini
+sed -i "s/{{p2p_port}}/$p2p_port/" /opt/settings.ini
+sed -i "s/{{dmr_port}}/$dmr_port/" /opt/settings.ini
+sed -i "s/{{rdac_port}}/$rdac_port/" /opt/settings.ini
+sed -i "s/{{local_ip}}/$local_port/" /opt/settings.ini
+sed -i "s/{{master_ip}}/$master_ip/" /opt/settings.ini
+sed -i "s/{{master_port}}/$master_port/" /opt/settings.ini
 
 sed -i "s/{{DMRG_OPTIONS}}/$DMRG_OPTIONS/" /opt/DMRGateway.ini
 sed -i "s/{{DMRG_TARGET}}/$DMRG_TARGET/" /opt/DMRGateway.ini
