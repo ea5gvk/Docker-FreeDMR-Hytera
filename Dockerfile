@@ -1,4 +1,6 @@
-FROM debian:bullseye-slim
+FROM python:3.7-alpine
+
+
 
 ENTRYPOINT [ "/entrypoint" ]
 
