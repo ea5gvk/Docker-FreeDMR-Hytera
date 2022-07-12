@@ -58,5 +58,7 @@ cd /opt/HBLink
 python /opt/HBLink/HB_Bridge.py -c /opt/hblink.cfg -b /opt/HB_Bridge.cfg &
 cd /opt/DMRGateway
 
+/opt/hytera/hytera-hombrew-bridge.py settings.ini
+
 /opt/DMRGateway/DMRGateway /opt/DMRGateway.ini
 	
