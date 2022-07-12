@@ -25,17 +25,7 @@ sed -i "s/{{IPSC_RADIO_ID}}/$IPSC_RADIO_ID/" /opt/dmrlink.cfg
 sed -i "s/{{IPSC_AUTH_KEY}}/$IPSC_AUTH_KEY/" /opt/dmrlink.cfg
 
 
-sed -i "s/{{HB_CALLSIGN}}/$HB_CALLSIGN/" /opt/hblink.cfg
-sed -i "s/{{HB_RADIO_ID}}/$HB_RADIO_ID/" /opt/hblink.cfg
-sed -i "s/{{HB_RX_FREQ}}/$HB_RX_FREQ/" /opt/hblink.cfg
-sed -i "s/{{HB_TX_FREQ}}/$HB_TX_FREQ/" /opt/hblink.cfg
-sed -i "s/{{HB_TX_POWER}}/$HB_TX_POWER/" /opt/hblink.cfg
-sed -i "s/{{HB_COLORCODE}}/$HB_COLORCODE/" /opt/hblink.cfg
-sed -i "s/{{HB_LAT}}/$HB_LAT/" /opt/hblink.cfg
-sed -i "s/{{HB_LON}}/$HB_LON/" /opt/hblink.cfg
-sed -i "s/{{HB_HEIGHT}}/$HB_HEIGHT/" /opt/hblink.cfg
-sed -i "s/{{HB_LOCATION}}/$HB_LOCATION/" /opt/hblink.cfg
-sed -i "s/{{HB_SLOTS}}/$HB_SLOTS/" /opt/hblink.cfg
+
 
 sed -i "s/{{DMRG_OPTIONS}}/$DMRG_OPTIONS/" /opt/DMRGateway.ini
 sed -i "s/{{DMRG_TARGET}}/$DMRG_TARGET/" /opt/DMRGateway.ini
