@@ -33,23 +33,6 @@ services:
           #This should probably be the repeater server's SERVER_ID
           - IPSC_RADIO_ID=2341
           - IPSC_AUTH_KEY=
-          #Configure HBP (repeater) details (HB_Bridge)
-          - HB_CALLSIGN=
-          - HB_RADIO_ID=
-          - HB_RX_FREQ=
-          - HB_TX_FREQ=
-          - HB_TX_POWER=
-          - HB_COLORCODE=
-          - 'HB_LAT='
-          - 'HB_LON=-'
-          - HB_HEIGHT=
-          - HB_LOCATION=
-          #Which slots to enable: 
-          # 1 = 1, 2 = 2, 3 = both
-          # Note there are some issues with both slots
-          # at this time.
-          # Slot 2 is setup to work with dial-a-tg **only**
-          - HB_SLOTS=3
           #Configure Repeater server side (DMRGateway)
           #Put an Options line here to configure static TGs etc
           - 'DMRG_OPTIONS='
