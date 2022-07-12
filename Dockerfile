@@ -5,17 +5,13 @@ FROM python:3.10-alpine
 ENTRYPOINT [ "/entrypoint" ]
 
 RUN adduser -D -u 54000 radio && \
-	apk add --update python3 py-pip && \
-	pip3 install pip wheel setuptools --upgrade && \
-	pip3 install hytera-homebrew-bridge --upgrade && \
+	apk add git gcc musl-dev && \
+	pip install hytera-homebrew-bridge && \
 	git clone https://github.com/g4klx/DMRGateway.git && \
 	cd DMRGateway && \
 	git reset --hard 6e89e4922f8c5eb7ec3797729a82137d70bc8940 && \
 	make && \
-	apt-get remove -y  gcc g++ make git wget && \
-	apt-get -y autoremove && \
-	apt-get -y purge && \
-	rm -rvf /var/cache/apt/archives/*  && \
+	apk del git gcc musl-dev && \
 	chown 54000 /opt/* -R && \
 	chmod 777 /opt/ -R 
 
