@@ -5,7 +5,7 @@ FROM python:3.10-alpine
 ENTRYPOINT [ "/entrypoint" ]
 
 RUN adduser -D -u 54000 radio && \
-	apk add git gcc musl-dev make && \
+	apk add git gcc g++ musl-dev make && \
 	pip install hytera-homebrew-bridge && \
 	git clone https://github.com/g4klx/DMRGateway.git && \
 	cd DMRGateway && \
