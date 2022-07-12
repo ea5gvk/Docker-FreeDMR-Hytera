@@ -14,10 +14,12 @@ services:
     FreeDMR-HYTERA:
         container_name: FreeDMR-HYTERA
         ports:
-          #IPSC port - right side always stays the same (inside container), left side is 
+          #HYTERA ports - right side always stays the same (inside container), left side is 
           #the port you want to present on the outside.
           #This is automatically mapped - docker uses iptables to do this
-          - '55000:55000/udp'
+          - '50000:50000/udp'
+          - '50001:50001/udp'
+          - '50002:50002/udp'
         environment:
           #Configure IPSC side (IPSC_Bridge)
           #True if we are the master
