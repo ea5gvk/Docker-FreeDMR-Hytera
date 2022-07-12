@@ -5,6 +5,7 @@ ENTRYPOINT [ "/entrypoint" ]
 RUN useradd -u 54000 radio && \
 apt-get update && \
 apt-get install -y  git gcc g++ python3 python3-dev wget make && \
+apt-get install pip
 cd /opt && \
 python3 -m pip install pip wheel setuptools --upgrade
 python3 -m pip install hytera-homebrew-bridge --upgrade
