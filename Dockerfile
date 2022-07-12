@@ -8,8 +8,8 @@ RUN useradd -u 54000 radio && \
 
 Install Python, Install pip
 RUN apk add --update python3 py-pip
-python3 -m pip install pip wheel setuptools --upgrade
-python3 -m pip install hytera-homebrew-bridge --upgrade
+pip install pip wheel setuptools --upgrade
+pip install hytera-homebrew-bridge --upgrade
 
 git clone https://github.com/g4klx/DMRGateway.git && \
 cd DMRGateway && \
