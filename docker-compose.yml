@@ -28,9 +28,11 @@ services:
           - dmr_port =
           - rdac_port =
           # homebrew  
+          -protocol = dmrgateway
           -local_ip = 0.0.0.0
+          -local_port = 
           -master_ip =
-          -master_port = 62031
+          -master_port = 62041
           #Configure Repeater server side (DMRGateway)
           #Put an Options line here to configure static TGs etc
           - 'DMRG_OPTIONS='
