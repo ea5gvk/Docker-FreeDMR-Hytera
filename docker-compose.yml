@@ -21,20 +21,16 @@ services:
           - '50001:50001/udp'
           - '50002:50002/udp'
         environment:
-          #Configure IPSC side (IPSC_Bridge)
-          #True if we are the master
-          #False if we are connecting to an existing IPSC network
-          - IPSC_MASTER_PEER=True
-          #IP and Port only needed if the above is False
-          - IPSC_MASTER_IP=
-          - IPSC_MASTER_PORT=
-          #Which timeslots to forward
-          - IPSC_TS1=True
-          - IPSC_TS2=True
-          #DMR ID we use to talk to the IPSC network
-          #This should probably be the repeater server's SERVER_ID
-          - IPSC_RADIO_ID=2341
-          - IPSC_AUTH_KEY=
+          #hytera connection 
+          #ip is the public ip the hytera repeater will connect too
+          - ip =
+          - p2p_port =
+          - dmr_port =
+          - rdac_port =
+          # homebrew  
+          -local_ip = 0.0.0.0
+          -master_ip =
+          -master_port = 62031
           #Configure Repeater server side (DMRGateway)
           #Put an Options line here to configure static TGs etc
           - 'DMRG_OPTIONS='
