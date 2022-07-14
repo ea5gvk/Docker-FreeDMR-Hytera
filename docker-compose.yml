@@ -1,10 +1,8 @@
-#Dockerised IPSC <--> HomeBrew Protocol stack. 
+#Dockerised Hytera <--> HomeBrew Protocol stack. 
 #
-#For connecting Motorola repeaters to FreeDMR
-#NB: If you get strange audio problems, try only 
-#enabling one timelot. This is a known issue 
-#with the current tools. 
-
+#For connecting Hytera repeaters to FreeDMR
+# This should work with any Hytera repater ver 7 ver 8 ver 9 firmware 
+#
 version: '3.3'
 services:
     #Duplicate this section for each repeater
