@@ -18,12 +18,12 @@ sed -i "s/{{ip}}/$ip/" /opt/settings.ini
 sed -i "s/{{p2p_port}}/$p2p_port/" /opt/settings.ini
 sed -i "s/{{dmr_port}}/$dmr_port/" /opt/settings.ini
 sed -i "s/{{rdac_port}}/$rdac_port/" /opt/settings.ini
-sed -i "s/{{local_ip}}/$protocol/" /opt/settings.ini
+sed -i "s/{{protocol}}/$protocol/" /opt/settings.ini
 sed -i "s/{{local_ip}}/$local_ip/" /opt/settings.ini
-sed -i "s/{{local_ip}}/$local_port/" /opt/settings.ini
+sed -i "s/{{local_port}}/$local_port/" /opt/settings.ini
 sed -i "s/{{master_ip}}/$master_ip/" /opt/settings.ini
 sed -i "s/{{master_port}}/$master_port/" /opt/settings.ini
-sed -i "s/{{local_ip}}/$password/" /opt/settings.ini
+sed -i "s/{{password}}/$password/" /opt/settings.ini
 
 sed -i "s/{{DMRG_OPTIONS}}/$DMRG_OPTIONS/" /opt/DMRGateway.ini
 sed -i "s/{{DMRG_TARGET}}/$DMRG_TARGET/" /opt/DMRGateway.ini
