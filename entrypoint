@@ -46,7 +46,7 @@ fi
 
 #Run processes
 
-python /usr/local/bin/hytera-hombrew-bridge.py /opt/settings.ini &
+python /usr/local/bin/hytera-homebrew-bridge.py /opt/settings.ini &
 
 cd /opt/DMRGateway
 
