@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #Check if a template is mapped and if so, copy it in
 if [ -r "/opt/DMRGateway.tmpl" ] 

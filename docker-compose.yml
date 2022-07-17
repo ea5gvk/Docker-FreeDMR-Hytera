@@ -21,17 +21,17 @@ services:
         environment:
           #hytera connection 
           #ip is the public ip the hytera repeater will connect too
-          - ip =
-          - p2p_port =
-          - dmr_port =
-          - rdac_port =
+          - ip=
+          - p2p_port=
+          - dmr_port=
+          - rdac_port=
           # homebrew  
-          -protocol = dmrgateway
-          -local_ip = 0.0.0.0
-          -local_port = 64032
-          -master_ip = 127.0.0.1
-          -master_port = 64031
-          -password = PASSWORD
+          - protocol=dmrgateway
+          - local_ip=0.0.0.0
+          - local_port=64032
+          - master_ip=127.0.0.1
+          - master_port=64031
+          - password=PASSWORD
           #Configure Repeater server side (DMRGateway)
           #Put an Options line here to configure static TGs etc
           - 'DMRG_OPTIONS='
