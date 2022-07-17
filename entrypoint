@@ -14,6 +14,9 @@ then
 fi
 
 #Substitute enivronment variables into files
+
+
+sed -i "s/{{family}}/$family/" /opt/settings.ini
 sed -i "s/{{ip}}/$ip/" /opt/settings.ini
 sed -i "s/{{p2p_port}}/$p2p_port/" /opt/settings.ini
 sed -i "s/{{dmr_port}}/$dmr_port/" /opt/settings.ini
@@ -24,6 +27,21 @@ sed -i "s/{{local_port}}/$local_port/" /opt/settings.ini
 sed -i "s/{{master_ip}}/$master_ip/" /opt/settings.ini
 sed -i "s/{{master_port}}/$master_port/" /opt/settings.ini
 sed -i "s/{{password}}/$password/" /opt/settings.ini
+sed -i "s/{{callsign}}/$callsign/" /opt/settings.ini
+sed -i "s/{{repeater_dmr_id}}/$repeater_dmr_id/" /opt/settings.ini
+sed -i "s/{{color_code}}/$color_code/" /opt/settings.ini
+sed -i "s/{{latitude)}/$latitude/" /opt/settings.ini
+sed -i "s/{longitude}}/$longitude/" /opt/settings.ini
+sed -i "s/{{antenna_height}}/$antenna_height/" /opt/settings.ini
+sed -i "s/{{location}}/$location/" /opt/settings.ini
+sed -i "s/{{description}}/$description/" /opt/settings.ini
+sed -i "s/{{software_id}}/$software_id/" /opt/settings.ini
+sed -i "s/{{package_id}}/$package_id/" /opt/settings.ini
+sed -i "s/{{rx_freq}}/$rx_freq/" /opt/settings.ini
+sed -i "s/{{tx_freq}}/$tx_freq/" /opt/settings.ini
+sed -i "s/{{tx_power}}/$tx_power/" /opt/settings.ini
+sed -i "s/{{timeslots}}/$timeslots/" /opt/settings.ini
+sed -i "s/{{use_random_stream_id}}/$use_random_stream_id/" /opt/settings.ini
 
 sed -i "s/{{DMRG_OPTIONS}}/$DMRG_OPTIONS/" /opt/DMRGateway.ini
 sed -i "s/{{DMRG_TARGET}}/$DMRG_TARGET/" /opt/DMRGateway.ini
