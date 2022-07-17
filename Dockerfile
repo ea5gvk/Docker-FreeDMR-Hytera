@@ -12,7 +12,7 @@ RUN adduser -D -u 54000 radio && \
 	cd DMRGateway && \
 	git reset --hard 6e89e4922f8c5eb7ec3797729a82137d70bc8940 && \
 	make && \
-	apk del git gcc g++ musl-dev make && \
+	apk del git gcc g++ make && \
 	chown 54000 /opt/* -R && \
 	chmod 777 /opt/ -R 
 
