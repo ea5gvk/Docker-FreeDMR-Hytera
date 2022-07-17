@@ -26,7 +26,7 @@ services:
           - dmr_port=
           - rdac_port=
           # homebrew  
-          - protocol=dmrgateway
+          - protocol=mmdvm
           - local_ip=0.0.0.0
           - local_port=64032
           - master_ip=127.0.0.1
