@@ -1,47 +1,70 @@
-#Dockerised Hytera <--> HomeBrew Protocol stack. 
+###############################################################################
+# Copyright (C) 2022 Simon Adlem, G7RZU <g7rzu@gb7fr.org.uk>  
 #
-#For connecting Hytera repeaters to FreeDMR
-# This should work with any Hytera repater ver 7 ver 8 ver 9 firmware 
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 3 of the License, or
+#   (at your option) any later version.
 #
-version: '3.3'
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software Foundation,
+#   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+################################################################################
+
+version: '2.4'
 services:
     #Duplicate this section for each repeater
     #do docker-compose down and then docker-compose up -d in this 
     #directory afterwards to stop and start the containers 
     #you may need to do conntrack -F after the restart
-    FreeDMR-HYTERA:
-        container_name: FreeDMR-HYTERA
+    FreeDMR-Hytera:
+        container_name: FreeDMR-Hytera
         ports:
-          #HYTERA ports - right side always stays the same (inside container), left side is 
-          #the port you want to present on the outside.
-          #This is automatically mapped - docker uses iptables to do this
-          - '50000:50000/udp'
-          - '50001:50001/udp'
-          - '50002:50002/udp'
+            - '50000:50000/udp'
+            - '50001:50001/udp'
+            - '50002:50002/udp'
         environment:
-          #hytera connection 
-          #ip is the public ip the hytera repeater will connect too
-          - ip=
-          - p2p_port=
-          - dmr_port=
-          - rdac_port=
-          # homebrew  
-          - protocol=mmdvm
-          - local_ip=0.0.0.0
-          - local_port=64032
-          - master_ip=127.0.0.1
-          - master_port=64031
-          - password=PASSWORD
           #Configure Repeater server side (DMRGateway)
           #Put an Options line here to configure static TGs etc
-          - 'DMRG_OPTIONS='
+          - 'DMRG_OPTIONS=TS1=23590;DIAL=2350;VOICE=1;LANG=en_GB;SINGLE=1;TIMER=10;'
+            #If not empty, rewrite TS1TG9 to the TG specified
+          - 'DMRG_REWRITETS1TG9='
           #Target server
           - DMRG_TARGET=
-          #Disable dial-a-tg on slot 2
-          - DMRG_DISABLEDIAL=0
-          #Add a rewrite to TS1TG9.
-          #Leave emtpy to disable
-          - DMRG_REWRITETS1TG9=
-        image: 'hacknix/freedmr-hytera:latest'
+          # callsign and repeater_dmr_id, if provided will override the one read from repeater
+          - callsign=
+          - repeater_dmr_id=
+          # params for configuration reporting
+          - color_code=
+          - latitude=
+          - longitude=
+          - antenna_height=
+          # 20 ascii letters, will be trimmed if exceeded
+          - location=
+          - description=
+          # use these to override params read out of repeater
+          - rx_freq=
+          - tx_freq=
+          - tx_power=
+          # 1 = only TS1, 2 = only TS2, 3 = TS1 and TS2
+          - timeslots=3
+
+        image: 'gitlab.hacknix.net:5050/hacknix/docker-freedmr-hytera:development-latest'
         #Container will persist over reboots
         restart: "unless-stopped"
+        networks:
+           - app_net
+      
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+          gateway: 172.16.238.1
